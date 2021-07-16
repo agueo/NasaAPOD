@@ -1,5 +1,7 @@
 package nasa
 
+import "fmt"
+
 type ApiResponse struct {
 	Date        string `json:"date"`
 	MediaType   string `json:"media_type"`
@@ -35,4 +37,23 @@ func (a ApiResponse) GetExplanation() string {
 
 func (a ApiResponse) GetMediaType() string {
 	return a.MediaType
+}
+
+func (a ApiResponse) String() string {
+	s := ``
+	s += fmt.Sprintln("Title:", a.GetTitle())
+	s += fmt.Sprintln("Date:", a.GetDate())
+	s += fmt.Sprintln("Explanation:", a.GetExplanation())
+	s += fmt.Sprintln("Media-Type:", a.GetMediaType())
+	s += fmt.Sprintln("Url:", a.GetUrl())
+	s += fmt.Sprintln("HdUrl:", a.GetHdUrl())
+	return s
+}
+
+func (i ImagesResponse) String() string {
+	s := ``
+	for _, image := range i.Images {
+		s += image.String()
+	}
+	return s
 }
